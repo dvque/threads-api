@@ -1,8 +1,5 @@
-```
-bun install
-bun run dev
-```
+# Threads API no oficial
 
-```
-open http://localhost:3000
-```
+<div align="center">
+<small>Para fines educativos</small>
+</div>
