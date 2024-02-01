@@ -28,12 +28,20 @@ export const fetchUserIdByName = ({ userName }: { userName: string }) => {
     })
 }
 
-export const fetchUserProfile = ({ userId }: { userId: string }) => {
+type fetchUserParams = { userId?: string, userName: string } | { userId: string, userName?: string }
+
+export const fetchUserProfile = async ({ userId, userName }: fetchUserParams) => {
+    if(userName && !userId) {
+        userId = await fetchUserIdByName({ userName });
+    }
     const variables = JSON.stringify({ userID: userId });
     return fetchBase({ documentId: ENDPOINTS_DOCUMENT_ID.USER_PROFILE, variables })
 }
 
-export const fetchUserThreads = ({ userId }: {userId: string}) => {
+export const fetchUserThreads = async ({ userId, userName }: fetchUserParams) => {
+    if(userName && !userId) {
+        userId = await fetchUserIdByName({ userName });
+    }
     const variables = JSON.stringify({ userID: userId });
     return fetchBase({ documentId: ENDPOINTS_DOCUMENT_ID.USER_THREADS, variables })
 }
