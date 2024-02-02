@@ -46,6 +46,14 @@ export const fetchUserThreads = async ({ userId, userName }: fetchUserParams) =>
     return fetchBase({ documentId: ENDPOINTS_DOCUMENT_ID.USER_THREADS, variables })
 }
 
+export const fetchUserReplies = async ({ userId, userName }: fetchUserParams) => {
+    if(userName && !userId) {
+        userId = await fetchUserIdByName({ userName });
+    }
+    const variables = JSON.stringify({ userID: userId });
+    return fetchBase({ documentId: ENDPOINTS_DOCUMENT_ID.USER_REPLIES, variables })
+}
+
 export const fetchThreadReplies = ({ threadId }: { threadId: string }) => {
     const variables = JSON.stringify({ postID: threadId });
     return fetchBase({ documentId: ENDPOINTS_DOCUMENT_ID.THREADS_REPLIES, variables })
