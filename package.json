@@ -5,7 +5,7 @@
     "watch:api": "bun run --watch src/api/index.ts"
   },
   "dependencies": {
-    "hono": "^3.12.8"
+    "hono": "^3.12.10"
   },
   "devDependencies": {
     "@types/bun": "^1.0.0"
