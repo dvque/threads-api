@@ -11,6 +11,10 @@ app.get('/api/users/:userId', async (context) => {
   return context.json(data)
 })
 
+app.use('*', async (c, next) => {
+  c.notFound()
+})
+
 export default {
   port,
   fetch: app.fetch, // Bun
