@@ -1,7 +1,7 @@
 import { Hono } from "hono";
 import { fetchUserProfile } from "../lib/fetch";
 
-const port = +(Bun.env.PORT || 1234);
+const port = +(Bun.env.PORT || 3000);
 
 const app = new Hono()
 
