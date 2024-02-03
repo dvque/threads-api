@@ -1,5 +1,7 @@
+import { ThreadsUserProfileResponse } from "../types/threads-api";
 import { ENDPOINTS_DOCUMENT_ID, GRAPHQL_ENDPOINT, THREADS_APP_ID } from "./consts";
 import { IS_DEBUG } from "./env";
+import { mapUserProfile } from "./map";
 
 const fetchBase = ({ documentId, variables } : {documentId: string, variables: string} ) => {
     return fetch (GRAPHQL_ENDPOINT, {
@@ -35,7 +37,11 @@ export const fetchUserProfile = async ({ userId, userName }: fetchUserParams) =>
         userId = await fetchUserIdByName({ userName });
     }
     const variables = JSON.stringify({ userID: userId });
-    return fetchBase({ documentId: ENDPOINTS_DOCUMENT_ID.USER_PROFILE, variables })
+    const data = (await fetchBase(
+        { documentId: ENDPOINTS_DOCUMENT_ID.USER_PROFILE, variables })
+    ) as ThreadsUserProfileResponse
+
+    return mapUserProfile(data)
 }
 
 export const fetchUserThreads = async ({ userId, userName }: fetchUserParams) => {
