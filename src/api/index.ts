@@ -1,3 +1,4 @@
+import { Hono } from "hono";
 import { fetchUserProfile } from "../lib/fetch";
 
 const server = Bun.serve({
